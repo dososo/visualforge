@@ -8,6 +8,7 @@ import {
   unlinkSync
 } from "node:fs";
 import path from "node:path";
+import { setTimeout as delay } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -15,6 +16,7 @@ const defaultOutputPath = path.join(packageRoot, "release", "darwin-universal", 
 const outputPath = process.argv[2] ? path.resolve(process.argv[2]) : defaultOutputPath;
 const entitlementsPath = path.join(packageRoot, "release-entitlements.plist");
 const signingIdentity = process.env.VISUALFORGE_SIGN_IDENTITY?.trim();
+const MAX_TIMESTAMP_ATTEMPTS = 3;
 
 if (process.platform !== "darwin") throw new Error("Universal 最终签名只能在 macOS 执行");
 if (!signingIdentity) throw new Error("缺少 VISUALFORGE_SIGN_IDENTITY，不能完成 Universal 最终签名");
@@ -35,16 +37,27 @@ function removeExistingSignature(filePath) {
   }
 }
 
-function signSlice(filePath) {
-  execFileSync("/usr/bin/codesign", [
-    "--force",
-    "--options", "runtime",
-    "--timestamp",
-    "--entitlements", entitlementsPath,
-    "--identifier", "com.blteam.visualforge.native-host",
-    "--sign", signingIdentity,
-    filePath
-  ], { stdio: "inherit" });
+async function signSlice(filePath) {
+  for (let attempt = 1; attempt <= MAX_TIMESTAMP_ATTEMPTS; attempt += 1) {
+    try {
+      execFileSync("/usr/bin/codesign", [
+        "--force",
+        "--options", "runtime",
+        "--timestamp",
+        "--entitlements", entitlementsPath,
+        "--identifier", "com.blteam.visualforge.native-host",
+        "--sign", signingIdentity,
+        filePath
+      ], { stdio: "pipe" });
+      return;
+    } catch (error) {
+      const stderr = String(error?.stderr ?? "");
+      const timestampUnavailable = stderr.includes("The timestamp service is not available.");
+      if (!timestampUnavailable || attempt === MAX_TIMESTAMP_ATTEMPTS) throw error;
+      process.stderr.write(`Apple 时间戳暂时不可用，${attempt * 2} 秒后重试当前架构签名。\n`);
+      await delay(attempt * 2_000);
+    }
+  }
 }
 
 try {
@@ -54,8 +67,8 @@ try {
   execFileSync("/usr/bin/lipo", [x64SourcePath, "-extract", "x86_64", "-output", x64Path]);
   removeExistingSignature(armPath);
   removeExistingSignature(x64Path);
-  signSlice(armPath);
-  signSlice(x64Path);
+  await signSlice(armPath);
+  await signSlice(x64Path);
   execFileSync("/usr/bin/lipo", ["-create", armPath, x64Path, "-output", temporaryOutputPath]);
   chmodSync(temporaryOutputPath, 0o755);
   execFileSync("/usr/bin/codesign", [
