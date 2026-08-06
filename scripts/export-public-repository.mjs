@@ -127,7 +127,9 @@ for (let index = 0; index < exportedFiles.length; index += 1) {
 
 const requiredPublicFiles = [
   "README.md", "README.en.md", "INSTALL.md", "INSTALL.en.md", "index.html", "downloads.html",
-  "assets/screenshots/01-start.png", "assets/screenshots/04-result.png",
+  "assets/brand/visualforge-mark.png", "assets/readme/visualforge-hero.png",
+  "assets/readme/portrait-style-panorama.png", "assets/readme/reference-recreation.png",
+  "assets/readme/grid-workflow.png", "assets/screenshots/01-start.png", "assets/screenshots/04-result.png",
   "apps/extension/entrypoints/sidepanel/App.tsx", "apps/native-host/src/index.ts"
 ];
 for (const required of requiredPublicFiles) {
