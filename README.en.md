@@ -61,16 +61,35 @@ Its value is not random one-click output. It reduces briefing and trial-and-erro
 | Per-image review and revision | Preserve candidates, quality guidance, targeted regeneration, and Final Selection | Fix one image without restarting the whole set |
 | Local project management | Save projects, asset relationships, and generation records | Continue, inspect, and export without a VisualForge cloud account |
 
-## Style panorama
+## Portrait and product style panorama
 
-VisualForge does not treat style as a filter. It builds a visual rule set from framing, viewpoint, space, light, color, material, action, and finishing. The first image can anchor tightly to the reference while later shots make limited changes inside the same visual world.
+VisualForge does not treat style as a filter. Its current built-in system contains **48 original styles across 6 categories**, each defining executable rules for framing, viewpoint, space, light, color, material, action, and finishing. The table below lists all 16 styles dedicated to portraits and products. The other 32 styles cover cinematic narrative, contemporary Eastern visual language, editorial art, and lifestyle directions, and can also be recommended according to the reference and creative goal.
 
 <div align="center">
   <img src="assets/readme/portrait-style-panorama.png" width="100%" alt="VisualForge portrait style panorama" />
   <br><sub><b>One person and one wardrobe system, developed through close-up, motion, night, studio, and architectural shots.</b></sub>
 </div>
 
-This supports natural lifestyle, cinematic narrative, fashion editorial, direct-flash documentary, night atmosphere, studio portraiture, monochrome, and related directions. Style controls the image-making method; it should not replace the identity in your person references or decide the final result for you.
+| Type | Style | What it is | Best for | Key controls |
+| --- | --- | --- | --- | --- |
+| Portrait | **Breathing Close Field**<br>呼吸近场 | Intimate portraiture built from close distance, real skin, and a gaze that does not perform for camera. | Emotional close-ups, profile covers, identity picks | Preserve identity, real skin, and an in-between breath; avoid skin smoothing, rigid eye contact, and hands covering features. |
+| Portrait | **Wind Trace Profile**<br>风迹侧写 | A single wind direction shapes silhouette, clothing, and action while identity stays clear. | Outdoor portraits, dynamic fashion, story sets | Preserve wind direction, identity, and credible balance; avoid random flying elements, blurred faces, and static wind poses. |
+| Portrait | **Night Walk Hard Flash**<br>夜行硬闪 | Mid-stride night frames combine near-axis hard flash with ambient light for accidental fashion energy. | Fashion, music portraits, night stories | Preserve mid-action timing and flash–ambient coexistence; avoid studio-black backgrounds, purple-blue neon, and eye contact in every shot. |
+| Portrait | **Low Voice Studio**<br>低声棚景 | Studio equipment and production traces remain visible while quiet, purposeful actions build an environmental portrait. | Fashion editorials, actor portraits, series identifiers | Preserve the person–studio relationship; avoid ID-photo backdrops, equipment clutter, and actions without a task. |
+| Portrait | **Oblique Disclosure**<br>斜轴显影 | One credible architectural diagonal drives camera position, spatial order, and the subject’s movement. | Fashion campaigns, portrait covers, character visuals | Preserve identity, complete limbs, and real architecture; avoid arbitrary tilts, facial distortion, and edge-hugging crops. |
+| Portrait | **Gravity Drapery**<br>重力成衣 | Fabric weight, support points, and bodily counterforce shape the subject instead of weightless flying cloth. | High fashion, full-body portraits, soft goods | Preserve body structure and a continuous weight line; avoid floating fabric, repeated folds, and arm–cloth fusion. |
+| Portrait | **Contour Counterproof**<br>轮廓反证 | A clear silhouette shot and a clear facial shot cross-validate the same identity. | Identity sets, fashion catalogues, actor portraits | Preserve facial structure, skeletal proportion, and compatible light direction; avoid identity loss or a different-looking person per shot. |
+| Portrait | **Posture Vector**<br>姿态折线 | Shoulder, hip, knee, and foot create one continuous force line, making posture the primary fashion language. | Fashion campaigns, full-body portraits, dynamic catalogues | Preserve complete limbs, real joints, and balance; avoid missing limbs, weightless poses, and conflicting garment tension. |
+| Product | **Black Mirror Plinth**<br>黑镜悬台 | A black-mirror base, short credible lift, accurate reflection, and edge light establish product authority. | Electronics, watches, perfume heroes | Preserve geometry, believable suspension, and matching reflection; avoid shadowless floating, blown edges, and duplicate parts. |
+| Product | **Liquid Crystal Explode**<br>液晶解构 | Transparent liquid and crystal layers explain material or ingredients without hiding product structure. | Skincare, beverages, transparent products | Preserve the full structure and one-axis transparency; avoid explosive debris, weightless splashes, and obscured labels. |
+| Product | **Soft Domain Daily**<br>软域日常 | Real signs of use place a product in a soft everyday space, proving value through cause and effect. | Homeware, headphones, beauty lifestyle | Preserve environmental scale, structure, and use causality; avoid simple background swaps, spotless showrooms, and gestures without results. |
+| Product | **Craft Cross Section**<br>工艺剖面 | One credible section or open state turns complex construction into an immediate advertising reason. | Mechanical products, packaging, feature detail | Preserve component count, position, and whole-to-detail order; avoid invented parts, causeless disassembly, and technical-text overload. |
+| Product | **Joined Imperfection**<br>合缝月体 | Real seams, slight off-axis alignment, and manufacturing color variation turn controlled imperfection into value. | Ceramics, fragrance and beauty vessels, home objects | Preserve silhouette, structure, and genuine seams; avoid forced ageing, random dents, and distorted products. |
+| Product | **Layered Unveiling**<br>层启仪式 | Cord, paper, cloth, box, and lining open in a real sequence, creating a non-interchangeable discovery story. | Perfume, jewellery, tea, skincare, gift sets | Preserve product and packaging structure plus opening order; avoid opening everything at once, floating packs, and repeated fingers. |
+| Product | **Stress Reveal**<br>应力显形 | Controlled load reveals material response and structural logic, proving performance through real force. | Sports gear, furniture, tools, durable-goods ads | Preserve geometry, interfaces, and branding; avoid breakage, liquefaction, and deformation without contact points. |
+| Product | **Contact Gauge**<br>接触计量 | One accurate human contact simultaneously proves scale, ergonomics, and the functional entry point. | Electronics, beauty, tools, wearables | Preserve product proportion and the single functional interface; avoid unrelated hands, wrong interfaces, and blocked branding or structure. |
+
+Style controls how an image should work. It does not override the identity or body in your person references, the structure of your product, or your final selection. Observable facts from the reference remain the first priority; built-in styles complete the method instead of forcing every project into one template.
 
 ## Product advertising
 
