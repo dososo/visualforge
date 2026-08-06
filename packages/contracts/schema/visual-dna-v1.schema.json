@@ -1,0 +1,565 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.1.0"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "updatedAt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sourceImageHash": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "analysisModel": {
+      "type": "string",
+      "minLength": 1
+    },
+    "analysisVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "portrait",
+        "product",
+        "poster",
+        "illustration",
+        "photography",
+        "other"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "distinctiveFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        },
+        "preserve": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        }
+      },
+      "required": [
+        "description",
+        "distinctiveFeatures",
+        "preserve"
+      ],
+      "additionalProperties": false
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "action": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "environment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "description",
+        "count",
+        "action",
+        "environment"
+      ],
+      "additionalProperties": false
+    },
+    "composition": {
+      "type": "object",
+      "properties": {
+        "shotType": {
+          "type": "string"
+        },
+        "subjectPlacement": {
+          "type": "string"
+        },
+        "negativeSpace": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "string"
+        },
+        "aspectRatioHint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "shotType",
+        "subjectPlacement",
+        "negativeSpace",
+        "depth",
+        "aspectRatioHint"
+      ],
+      "additionalProperties": false
+    },
+    "camera": {
+      "type": "object",
+      "properties": {
+        "angle": {
+          "type": "string"
+        },
+        "lens": {
+          "type": "string"
+        },
+        "focalLength": {
+          "type": "string"
+        },
+        "distance": {
+          "type": "string"
+        },
+        "depthOfField": {
+          "type": "string"
+        },
+        "perspective": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "angle",
+        "lens",
+        "focalLength",
+        "distance",
+        "depthOfField",
+        "perspective"
+      ],
+      "additionalProperties": false
+    },
+    "lighting": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "quality": {
+          "type": "string"
+        },
+        "contrast": {
+          "type": "string"
+        },
+        "highlightBehavior": {
+          "type": "string"
+        },
+        "shadowBehavior": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "direction",
+        "quality",
+        "contrast",
+        "highlightBehavior",
+        "shadowBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "dominantColors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "accentColors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 6
+        },
+        "saturation": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "string"
+        },
+        "contrast": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "dominantColors",
+        "accentColors",
+        "saturation",
+        "temperature",
+        "contrast"
+      ],
+      "additionalProperties": false
+    },
+    "material": {
+      "type": "object",
+      "properties": {
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        },
+        "finish": {
+          "type": "string"
+        },
+        "reflectivity": {
+          "type": "string"
+        },
+        "translucency": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "types",
+        "finish",
+        "reflectivity",
+        "translucency"
+      ],
+      "additionalProperties": false
+    },
+    "texture": {
+      "type": "object",
+      "properties": {
+        "medium": {
+          "type": "string"
+        },
+        "grain": {
+          "type": "string"
+        },
+        "sharpness": {
+          "type": "string"
+        },
+        "surfaceDetail": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "medium",
+        "grain",
+        "sharpness",
+        "surfaceDetail"
+      ],
+      "additionalProperties": false
+    },
+    "mood": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        },
+        "emotionalTone": {
+          "type": "string"
+        },
+        "atmosphere": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "keywords",
+        "emotionalTone",
+        "atmosphere"
+      ],
+      "additionalProperties": false
+    },
+    "style": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        },
+        "medium": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "keywords",
+        "medium"
+      ],
+      "additionalProperties": false
+    },
+    "locks": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "subject": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "composition": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "camera": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "lighting": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "palette": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "material": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "texture": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ]
+        }
+      },
+      "required": [
+        "identity",
+        "subject",
+        "composition",
+        "camera",
+        "lighting",
+        "palette",
+        "material",
+        "texture",
+        "style"
+      ],
+      "additionalProperties": false
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceImageHash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "style_layout",
+              "style",
+              "subject",
+              "identity",
+              "composition",
+              "palette",
+              "material"
+            ]
+          },
+          "influence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "assetId",
+          "sourceImageHash",
+          "role",
+          "influence",
+          "notes"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 8
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "preserve": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        },
+        "avoid": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 12
+        }
+      },
+      "required": [
+        "preserve",
+        "avoid"
+      ],
+      "additionalProperties": false
+    },
+    "invariants": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 12
+    },
+    "variables": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 12
+    },
+    "generationBrief": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "sourceImageHash",
+    "analysisModel",
+    "analysisVersion",
+    "domain",
+    "summary",
+    "identity",
+    "subject",
+    "composition",
+    "camera",
+    "lighting",
+    "palette",
+    "material",
+    "texture",
+    "mood",
+    "style",
+    "locks",
+    "references",
+    "constraints",
+    "invariants",
+    "variables",
+    "generationBrief",
+    "confidence"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

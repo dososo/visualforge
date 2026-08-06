@@ -1,0 +1,38 @@
+node_modules/
+.worktrees/
+.wxt/
+.output/
+dist/
+coverage/
+playwright-report/
+test-results/
+generated/
+*.log
+.DS_Store
+
+# 本机与签名配置
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.mobileprovision
+
+# 分发、签名与历史审计产物
+dist-distribution/
+apps/native-host/dist-standalone/
+apps/native-host/release/
+*.zip
+*.dmg
+
+# 真实网站／真实生成证据不随源码再分发；保留中文文档与结构化审计数据
+tests/evidence/**/*.png
+tests/evidence/**/*.jpg
+tests/evidence/**/*.jpeg
+tests/evidence/**/*.webp
+tests/evidence/**/*.gif
+tests/evidence/**/*.mov
+tests/evidence/**/*.mp4
+tests/evidence/identity-subject-real/

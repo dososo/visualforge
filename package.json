@@ -1,0 +1,30 @@
+{
+  "name": "styleforge",
+  "version": "0.5.8",
+  "private": true,
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.34.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @styleforge/extension --filter @styleforge/native-host dev",
+    "dev:extension": "pnpm --filter @styleforge/extension dev",
+    "dev:host": "pnpm --filter @styleforge/native-host dev",
+    "setup:host": "pnpm --filter @styleforge/native-host run setup",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "pretest": "pnpm --filter @styleforge/contracts build",
+    "test": "vitest run",
+    "build": "pnpm -r build",
+    "package": "pnpm --filter @styleforge/extension zip && pnpm --filter @styleforge/native-host package:distribution",
+    "export:public": "node scripts/export-public-repository.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@styleforge/contracts": "workspace:*",
+    "@styleforge/core": "workspace:*",
+    "@types/node": "^22.16.5",
+    "fake-indexeddb": "^6.2.5",
+    "fflate": "^0.8.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

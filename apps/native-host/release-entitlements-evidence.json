@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "evidenceScope": "historical-experiment-only",
+  "historicalArtifactVersion": "0.1.0",
+  "provesCurrentBuild": false,
+  "verifiedAt": "2026-08-01",
+  "runtime": "Node.js 22.17.1 SEA / V8",
+  "method": "历史实验：复制当时的 0.1.0 Universal Host，在临时目录以 Hardened Runtime 重新签名不同 entitlement 组合；不修改正式候选二进制。该结果只解释 entitlement 选择，不证明当前源码或当前发行字节已签名、可运行或已公证。",
+  "entitlements": {
+    "com.apple.security.cs.allow-jit": "Node SEA 内嵌的 V8 需要创建并执行 JIT 代码；无此权限时 Hardened Runtime 启动失败。",
+    "com.apple.security.cs.allow-unsigned-executable-memory": "x86_64 Node SEA 在 Rosetta 下仅有 allow-jit 仍无法完成 V8 可执行内存权限切换。"
+  },
+  "red": [
+    {
+      "configuration": "hardened-runtime-without-entitlements",
+      "arm64Exit": 133,
+      "x64Exit": 133,
+      "failure": "Node SEA 无法在 Hardened Runtime 下启动。"
+    },
+    {
+      "configuration": "allow-jit-only",
+      "arm64Exit": 0,
+      "x64Exit": 133,
+      "failure": "x86_64/Rosetta 的 V8 在 SetPermissions 可执行内存阶段失败。"
+    }
+  ],
+  "green": {
+    "configuration": "allow-jit-and-allow-unsigned-executable-memory",
+    "arm64Exit": 0,
+    "x64Exit": 0,
+    "verification": "两个架构均输出 visualforge-native-host 0.1.0，codesign --verify --strict 通过。"
+  },
+  "explicitlyExcluded": [
+    "com.apple.security.get-task-allow",
+    "com.apple.security.cs.disable-library-validation"
+  ]
+}

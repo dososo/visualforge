@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VisualForge：接入本机 Codex 的 Chrome 侧边栏插件。理解参考图，换成你的人物或商品，生成单张、套图与宫格。">
+  <meta property="og:title" content="VisualForge — 把喜欢的视觉，变成你的作品">
+  <meta property="og:description" content="捕获参考图，理解构图、光影与氛围，再生成你的版本。">
+  <meta property="og:image" content="https://raw.githubusercontent.com/dososo/visualforge/main/assets/screenshots/04-result.png">
+  <title>VisualForge — 把喜欢的视觉，变成你的作品</title>
+  <style>
+    :root { --paper:#f5f3ee; --card:#fffdfa; --ink:#202426; --sub:#64696c; --line:#d9d4c9; --brand:#29465b; --green:#2e6b4f; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; -webkit-font-smoothing:antialiased; }
+    a { color:var(--brand); }
+    .wrap { width:min(980px,calc(100% - 36px)); margin:0 auto; }
+    header { padding:72px 0 38px; text-align:center; }
+    .mark { width:88px; height:88px; border-radius:22px; }
+    h1 { margin:18px 0 4px; font:600 clamp(42px,8vw,70px)/1.08 Georgia,"Songti SC",serif; letter-spacing:-.045em; }
+    .lead { max-width:680px; margin:12px auto 22px; color:var(--sub); font-size:clamp(17px,3vw,21px); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+    .button { display:inline-flex; min-height:48px; align-items:center; padding:0 22px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--ink); font-weight:700; text-decoration:none; }
+    .button.primary { background:var(--brand); border-color:var(--brand); color:white; }
+    .meta { color:var(--sub); font-size:13px; }
+    section { padding:34px 0; }
+    h2 { margin:0 0 8px; font-size:clamp(26px,5vw,36px); letter-spacing:-.035em; }
+    .sub { margin:0 0 24px; color:var(--sub); }
+    .hero-shot,.shot img { display:block; width:100%; border:1px solid var(--line); border-radius:18px; box-shadow:0 16px 50px rgba(40,44,47,.09); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--card); }
+    .card h3 { margin:0 0 6px; font-size:17px; }
+    .card p { margin:0; color:var(--sub); font-size:14px; }
+    .shots { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .shot { margin:0; }
+    .shot figcaption { padding:10px 4px 0; color:var(--sub); font-size:14px; }
+    .steps { counter-reset:step; display:grid; gap:12px; }
+    .step { display:grid; grid-template-columns:40px 1fr; gap:12px; align-items:start; padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--card); }
+    .step::before { counter-increment:step; content:counter(step); display:grid; place-items:center; width:34px; height:34px; border-radius:10px; color:white; background:var(--brand); font-weight:800; }
+    .step strong { display:block; }
+    .step span { color:var(--sub); }
+    footer { margin-top:36px; padding:38px 0 58px; border-top:1px solid var(--line); color:var(--sub); text-align:center; font-size:14px; }
+    footer nav { display:flex; flex-wrap:wrap; justify-content:center; gap:18px; margin-bottom:12px; }
+    @media (max-width:720px) { header{padding-top:48px}.grid,.shots{grid-template-columns:1fr}.wrap{width:min(100% - 24px,980px)} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <img class="mark" src="apps/extension/assets/brand/visualforge-silver-proof-mark.png" alt="VisualForge">
+      <h1>VisualForge</h1>
+      <p class="lead">看到喜欢的图片，把它变成你的作品。一个接入本机 Codex 的 Chrome 侧边栏插件。</p>
+      <div class="actions">
+        <a class="button primary" href="downloads.html">下载 VisualForge 0.5.8</a>
+        <a class="button" href="https://github.com/dososo/visualforge">查看源码</a>
+      </div>
+      <p class="meta">Chrome 116+ · macOS／Windows／Linux · 本地优先 · Apache-2.0</p>
+    </header>
+
+    <img class="hero-shot" src="assets/screenshots/01-start.png" alt="VisualForge 插件真实运行首页">
+
+    <section>
+      <h2>它是什么</h2>
+      <p class="sub">在网页上捕获参考图，理解画面方法，再把人物或商品换成你的素材。</p>
+      <div class="grid">
+        <article class="card"><h3>理解画面</h3><p>构图、景别、动作、表情、光影、色彩、材质和氛围，不只是一句提示词。</p></article>
+        <article class="card"><h3>换成你的</h3><p>参考图负责怎么拍，你的人物或商品照片负责拍谁、拍什么。</p></article>
+        <article class="card"><h3>单张、套图与宫格</h3><p>逐张生成、检查、选择和修改，最终作品与历史记录保存在本机。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>真实插件界面</h2>
+      <p class="sub">以下截图来自 VisualForge 真实运行界面，未包含本机路径、账号凭据或参考来源信息。</p>
+      <div class="shots">
+        <figure class="shot"><img src="assets/screenshots/02-analysis.png" alt="VisualForge 分析参考图"><figcaption>先理解参考视觉，再让用户确认创作方法。</figcaption></figure>
+        <figure class="shot"><img src="assets/screenshots/03-subject.png" alt="VisualForge 换成人物素材"><figcaption>选择人物或商品，主体素材与画面参考职责分离。</figcaption></figure>
+        <figure class="shot"><img src="assets/screenshots/04-result.png" alt="VisualForge 生成结果"><figcaption>生成结果留在当前作品，支持继续修改与最终选择。</figcaption></figure>
+        <figure class="shot"><img src="assets/screenshots/05-library.png" alt="VisualForge 本地作品库"><figcaption>作品、人物和商品素材在本地统一管理。</figcaption></figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>三步开始</h2>
+      <div class="steps">
+        <div class="step"><div><strong>下载一个系统安装包</strong><span>包内同时包含本地连接组件和 Chrome 扩展。</span></div></div>
+        <div class="step"><div><strong>安装连接并加载扩展</strong><span>运行安装入口，在 <code>chrome://extensions</code> 加载解压后的扩展目录。</span></div></div>
+        <div class="step"><div><strong>检查 Codex 连接</strong><span>VisualForge 设置里看到“Codex 已连接”后即可创作，无需 API Key。</span></div></div>
+      </div>
+      <p><a href="https://github.com/dososo/visualforge/blob/main/INSTALL.md">查看最小安装指南 →</a></p>
+    </section>
+  </main>
+  <footer>
+    <nav><a href="downloads.html">下载</a><a href="privacy.html">隐私</a><a href="support.html">支持</a><a href="https://github.com/dososo/visualforge">GitHub</a><a href="https://x.com/thinkszyg">X @thinkszyg</a><a href="mailto:blteam2026@outlook.com">邮箱</a></nav>
+    <div>© 2026 爆裂队长 NEXT · VisualForge</div>
+  </footer>
+</body>
+</html>

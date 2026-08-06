@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>下载 VisualForge 0.5.8</title>
+  <style>
+    :root{--paper:#f5f3ee;--card:#fffdfa;--ink:#202426;--sub:#64696c;--line:#d9d4c9;--brand:#29465b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;line-height:1.7}main{width:min(900px,calc(100% - 32px));margin:auto;padding:54px 0 80px}a{color:var(--brand)}h1{margin:8px 0;font-size:clamp(34px,7vw,54px);letter-spacing:-.04em}p,li{color:var(--sub)}.platforms{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}.card{padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--card)}.card.recommended{border:2px solid var(--brand);padding:21px}.tag{display:none;color:var(--brand);font-size:13px;font-weight:800}.recommended .tag{display:block}.download{display:inline-flex;min-height:44px;align-items:center;padding:0 16px;border-radius:10px;background:var(--brand);color:white;font-weight:700;text-decoration:none}.sha{display:block;margin-top:10px;font-size:13px}code{overflow-wrap:anywhere}.notice{padding:16px;border-left:3px solid #8f6b2f;background:#eee6d7}ol{padding-left:22px}@media(max-width:760px){.platforms{grid-template-columns:1fr}}
+  </style>
+</head>
+<body><main>
+  <p><a href="./">← VisualForge</a></p>
+  <h1>下载 VisualForge 0.5.8</h1>
+  <p>先安装并登录 Codex。每个系统包都包含本地连接组件和 <code>VisualForge-extension.zip</code>，普通用户只需要下载一个。</p>
+  <div class="platforms">
+    <article class="card" data-platform="mac"><span class="tag">适合当前设备</span><h2>macOS Universal（Apple Silicon 与 Intel）</h2><p>同一个包支持两种 Mac。打开 DMG，运行 <code>Install.command</code>。</p><a class="download" href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-macos-universal.dmg">下载 macOS 版</a><a class="sha" href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-macos-universal.dmg.sha256">SHA-256</a></article>
+    <article class="card" data-platform="windows"><span class="tag">适合当前设备</span><h2>Windows 10／11 x64</h2><p>解压后右键 <code>Install.ps1</code>，使用 PowerShell 运行。</p><a class="download" href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-windows-x64.zip">下载 Windows 版</a><a class="sha" href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-windows-x64.zip.sha256">SHA-256</a></article>
+    <article class="card" data-platform="linux"><span class="tag">适合当前设备</span><h2>Linux x64</h2><p>解压后在终端运行 <code>./install.sh</code>。</p><a class="download" href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-linux-x64.tar.gz">下载 Linux 版</a><a class="sha" href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-linux-x64.tar.gz.sha256">SHA-256</a></article>
+  </div>
+  <p>只更新 Chrome 扩展：<a href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-chrome.zip">VisualForge-0.5.8-chrome.zip</a> · <a href="https://github.com/dososo/visualforge/releases/download/v0.5.8/VisualForge-0.5.8-chrome.zip.sha256">SHA-256</a></p>
+  <p class="notice"><strong>发行边界：</strong>macOS Universal 包经 Developer ID 签名、Apple 公证与 Staple。Windows／Linux 包由 macOS 交叉构建，尚未取得平台代码签名与完整真机连续验收；安装前请核对 SHA-256。</p>
+  <h2>下载后只做三件事</h2>
+  <ol><li>运行包内安装入口。</li><li>解压 <code>VisualForge-extension.zip</code>，在 <code>chrome://extensions</code> 开启开发者模式并加载该文件夹。</li><li>打开 VisualForge 设置，点击“重新检查连接”。</li></ol>
+  <p><a href="https://github.com/dososo/visualforge/blob/main/INSTALL.md">查看完整最小安装指南</a> · <a href="support.html">安装排查</a></p>
+</main><script>(()=>{const s=`${navigator.userAgentData?.platform??""} ${navigator.platform??""} ${navigator.userAgent}`.toLowerCase();const p=s.includes("win")?"windows":s.includes("linux")?"linux":s.includes("mac")?"mac":"";if(p)document.querySelector(`[data-platform="${p}"]`)?.classList.add("recommended")})()</script></body></html>

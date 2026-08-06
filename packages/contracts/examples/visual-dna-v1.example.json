@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.1.0",
+  "revision": 1,
+  "createdAt": 1000,
+  "updatedAt": 1000,
+  "sourceImageHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "analysisModel": "codex-app-server-default",
+  "analysisVersion": "visual-dna-v1",
+  "domain": "product",
+  "summary": "安静、克制的编辑摄影视觉语言",
+  "identity": {
+    "description": "无特定人物身份",
+    "distinctiveFeatures": [],
+    "preserve": []
+  },
+  "subject": {
+    "description": "单一商品",
+    "count": 1,
+    "action": null,
+    "environment": "简洁背景"
+  },
+  "composition": {
+    "shotType": "中景",
+    "subjectPlacement": "主体略偏右",
+    "negativeSpace": "左侧留白",
+    "depth": "前后景轻微分离",
+    "aspectRatioHint": "4:3"
+  },
+  "camera": {
+    "angle": "平视",
+    "lens": "标准镜头",
+    "focalLength": "50mm",
+    "distance": "中距离",
+    "depthOfField": "浅景深",
+    "perspective": "自然透视"
+  },
+  "lighting": {
+    "source": "大面积柔光源",
+    "direction": "右后方侧逆光",
+    "quality": "柔和漫射",
+    "contrast": "低到中等",
+    "highlightBehavior": "高光圆润",
+    "shadowBehavior": "阴影保留细节"
+  },
+  "palette": {
+    "dominantColors": ["月白", "岩灰", "灰绿色"],
+    "accentColors": [],
+    "saturation": "低饱和",
+    "temperature": "中性略冷",
+    "contrast": "克制的明度对比"
+  },
+  "material": {
+    "types": ["哑光材质"],
+    "finish": "细腻",
+    "reflectivity": "低",
+    "translucency": "不透明"
+  },
+  "texture": {
+    "medium": "编辑摄影",
+    "grain": "轻微细颗粒",
+    "sharpness": "主体清晰、背景柔和",
+    "surfaceDetail": "保留真实纹理"
+  },
+  "mood": {
+    "keywords": ["安静", "克制", "专业"],
+    "emotionalTone": "平静",
+    "atmosphere": "具有呼吸感"
+  },
+  "style": {
+    "keywords": ["克制", "编辑感"],
+    "medium": "编辑摄影"
+  },
+  "locks": {
+    "identity": "unlocked",
+    "subject": "unlocked",
+    "composition": "unlocked",
+    "camera": "unlocked",
+    "lighting": "unlocked",
+    "palette": "unlocked",
+    "material": "unlocked",
+    "texture": "unlocked",
+    "style": "unlocked"
+  },
+  "references": [
+    {
+      "assetId": null,
+      "sourceImageHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "role": "style_layout",
+      "influence": 1,
+      "notes": null
+    }
+  ],
+  "constraints": {
+    "preserve": ["主体轮廓清楚", "高光不过曝"],
+    "avoid": ["文字和 Logo", "霓虹光效"]
+  },
+  "invariants": ["主体与留白的比例", "侧逆光方向", "低饱和色彩"],
+  "variables": ["主体内容", "背景材质", "局部点缀色"],
+  "generationBrief": "保持平视中景与右侧主体布局，使用柔和侧逆光和低饱和中性色，创作原创编辑摄影。",
+  "confidence": 0.82
+}

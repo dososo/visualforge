@@ -1,0 +1,41 @@
+{
+  "name": "@styleforge/contracts",
+  "version": "0.5.8",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./native-messaging": {
+      "types": "./src/native-messaging.ts",
+      "default": "./dist/native-messaging.js"
+    },
+    "./subject-asset": {
+      "types": "./src/subject-asset.ts",
+      "default": "./dist/subject-asset.js"
+    },
+    "./domain-profile": {
+      "types": "./src/domain-profile.ts",
+      "default": "./dist/domain-profile.js"
+    },
+    "./creation-set": {
+      "types": "./src/creation-set.ts",
+      "default": "./dist/creation-set.js"
+    },
+    "./visual-dna.schema.json": "./schema/visual-dna-v1.schema.json"
+  },
+  "scripts": {
+    "schema:generate": "tsx scripts/generate-schema.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

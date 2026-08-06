@@ -1,0 +1,37 @@
+{
+  "name": "@styleforge/native-host",
+  "version": "0.5.8",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "visualforge-native-host": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "diagnose": "tsx src/index.ts --diagnose",
+    "setup": "tsx scripts/install-macos.ts",
+    "uninstall": "tsx scripts/uninstall-macos.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "build": "tsc",
+    "build:standalone": "pnpm --filter @styleforge/contracts build && node scripts/build-standalone.mjs",
+    "build:universal": "VISUALFORGE_TARGET_PLATFORM=darwin VISUALFORGE_TARGET_ARCH=arm64 pnpm run build:standalone && VISUALFORGE_TARGET_PLATFORM=darwin VISUALFORGE_TARGET_ARCH=x64 pnpm run build:standalone && node scripts/build-universal.mjs && node scripts/finalize-universal-signature.mjs",
+    "package:distribution": "pnpm --filter @styleforge/extension zip && pnpm run build:standalone && node scripts/package-distribution.mjs",
+    "package:windows-x64": "pnpm --filter @styleforge/extension zip && VISUALFORGE_TARGET_PLATFORM=win32 VISUALFORGE_TARGET_ARCH=x64 pnpm run build:standalone && VISUALFORGE_TARGET_PLATFORM=win32 VISUALFORGE_TARGET_ARCH=x64 node scripts/package-distribution.mjs",
+    "package:linux-x64": "pnpm --filter @styleforge/extension zip && VISUALFORGE_TARGET_PLATFORM=linux VISUALFORGE_TARGET_ARCH=x64 pnpm run build:standalone && VISUALFORGE_TARGET_PLATFORM=linux VISUALFORGE_TARGET_ARCH=x64 node scripts/package-distribution.mjs",
+    "package:universal": "pnpm --filter @styleforge/extension zip && pnpm run build:universal && VISUALFORGE_TARGET_PLATFORM=darwin VISUALFORGE_TARGET_ARCH=universal node scripts/package-distribution.mjs",
+    "notarize:distribution": "node scripts/notarize-distribution.mjs"
+  },
+  "dependencies": {
+    "@styleforge/contracts": "workspace:*",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.5",
+    "esbuild": "0.28.1",
+    "postject": "1.0.0-alpha.6",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
