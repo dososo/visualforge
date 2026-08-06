@@ -18,8 +18,8 @@ const x64Path = path.join(releaseRoot, "darwin-x64", "visualforge-native-host");
 const outputDir = path.join(releaseRoot, "darwin-universal");
 const outputPath = path.join(outputDir, "visualforge-native-host");
 const packageVersion = JSON.parse(await readFile(path.join(packageRoot, "package.json"), "utf8")).version;
-const entitlementsPath = path.join(packageRoot, "release-entitlements.plist");
 const entitlementsEvidencePath = path.join(packageRoot, "release-entitlements-evidence.json");
+const signOnlyScriptPath = path.join(packageRoot, "scripts", "sign-universal-only.mjs");
 const signingIdentity = process.env.VISUALFORGE_SIGN_IDENTITY?.trim();
 const entitlementsEvidence = JSON.parse(await readFile(entitlementsEvidencePath, "utf8"));
 
@@ -93,15 +93,8 @@ await withFreshStagingDirectory(
     const committedX64Path = path.join(temporaryDirectory, "visualforge-native-host.committed-x86_64");
     const temporaryChecksumsPath = path.join(temporaryDirectory, "SHA256SUMS");
     const temporaryMetadataPath = path.join(temporaryDirectory, "build-metadata.json");
-    const signUniversal = (filePath = temporaryOutputPath) => execFileAsync("/usr/bin/codesign", [
-      "--force",
-      "--options", "runtime",
-      "--timestamp",
-      "--entitlements", entitlementsPath,
-      "--identifier", "com.blteam.visualforge.native-host",
-      "--sign", signingIdentity,
-      filePath
-    ]);
+    const signUniversal = (filePath = temporaryOutputPath) =>
+      execFileAsync(process.execPath, [signOnlyScriptPath, filePath], { env: process.env });
     await Promise.all([
       copyFile(armPath, unsignedArmPath),
       copyFile(x64Path, unsignedX64Path)
@@ -115,7 +108,9 @@ await withFreshStagingDirectory(
     await signUniversal();
     await execFileAsync("/usr/bin/lipo", [temporaryOutputPath, "-verify_arch", "arm64", "x86_64"]);
     const architectures = await execFileAsync("/usr/bin/lipo", ["-archs", temporaryOutputPath]);
-    await execFileAsync("/usr/bin/codesign", ["--verify", "--strict", "--verbose=2", temporaryOutputPath]);
+    await execFileAsync("/usr/bin/codesign", [
+      "--verify", "--strict", "--all-architectures", "--verbose=2", temporaryOutputPath
+    ]);
     const [universalArmVersion, universalX64Version] = await Promise.all([
       execFileAsync("/usr/bin/arch", ["-arm64", temporaryOutputPath, "--version"], { timeout: 30_000 }),
       execFileAsync("/usr/bin/arch", ["-x86_64", temporaryOutputPath, "--version"], { timeout: 30_000 })
@@ -138,7 +133,7 @@ await withFreshStagingDirectory(
     await copyFile(temporaryOutputPath, coldVerificationPath);
     const finalSignatureVerification = await execFileAsync(
       "/usr/bin/codesign",
-      ["--verify", "--strict", "--verbose=2", coldVerificationPath]
+      ["--verify", "--strict", "--all-architectures", "--verbose=2", coldVerificationPath]
     );
     const universalArmSliceSha256 = sha256(universalArmBytes);
     const universalX64SliceSha256 = sha256(universalX64Bytes);
@@ -206,7 +201,7 @@ await withFreshStagingDirectory(
         await signUniversal(outputPath);
         await execFileAsync("/bin/cp", ["-p", outputPath, publishedColdVerificationPath]);
         await execFileAsync("/usr/bin/codesign", [
-          "--verify", "--strict", "--verbose=2", publishedColdVerificationPath
+          "--verify", "--strict", "--all-architectures", "--verbose=2", publishedColdVerificationPath
         ]);
         await execFileAsync("/bin/cp", ["-p", outputPath, publishedArmSourcePath]);
         await execFileAsync("/bin/cp", ["-p", outputPath, publishedX64SourcePath]);
@@ -237,7 +232,7 @@ await withFreshStagingDirectory(
     await execFileAsync("/bin/cp", ["-p", outputPath, committedArmSourcePath]);
     await execFileAsync("/bin/cp", ["-p", outputPath, committedX64SourcePath]);
     await execFileAsync("/usr/bin/codesign", [
-      "--verify", "--strict", "--verbose=2", committedColdVerificationPath
+      "--verify", "--strict", "--all-architectures", "--verbose=2", committedColdVerificationPath
     ]);
     await Promise.all([
       execFileAsync("/usr/bin/lipo", [committedArmSourcePath, "-extract", "arm64", "-output", committedArmPath]),
@@ -258,7 +253,9 @@ await withFreshStagingDirectory(
       writeFile(path.join(outputDir, "SHA256SUMS"), `${publishedHash}  visualforge-native-host\n`),
       writeFile(path.join(outputDir, "build-metadata.json"), `${JSON.stringify(metadata, null, 2)}\n`)
     ]);
-    await execFileAsync("/usr/bin/codesign", ["--verify", "--strict", "--verbose=2", outputPath]);
+    await execFileAsync("/usr/bin/codesign", [
+      "--verify", "--strict", "--all-architectures", "--verbose=2", outputPath
+    ]);
     process.stdout.write(`已构建 Universal Native Host：${outputPath}\nSHA-256：${publishedHash}\n`);
   }
 );

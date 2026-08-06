@@ -57,7 +57,9 @@ try {
     writeFile(checksumsPath, `${hash}  visualforge-native-host\n`),
     writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`)
   ]);
-  await execFileAsync("/usr/bin/codesign", ["--verify", "--strict", "--verbose=4", outputPath]);
+  await execFileAsync("/usr/bin/codesign", [
+    "--verify", "--strict", "--all-architectures", "--verbose=4", outputPath
+  ]);
   process.stdout.write(`Universal 最终路径签名与冷验签通过：${outputPath}\nSHA-256：${hash}\n`);
 } finally {
   for (const filePath of [armSourcePath, x64SourcePath, armPath, x64Path]) {
