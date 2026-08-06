@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { copyFile, mkdir, mkdtemp, readFile, readdir, rename, rmdir, unlink, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rename, rmdir, stat, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { promisify } from "node:util";
 
@@ -436,6 +436,12 @@ export async function publishArtifactGroup({ replacements, renamePath = rename, 
   let committed = false;
   try {
     for (const record of records) {
+      try {
+        await stat(record.outputPath);
+      } catch (error) {
+        if (error.code === "ENOENT") continue;
+        throw error;
+      }
       try {
         if (record.copyInsteadOfRename) {
           await copyPath(record.outputPath, record.backupPath);

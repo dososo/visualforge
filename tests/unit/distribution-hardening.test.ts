@@ -555,6 +555,26 @@ describe("发行打包安全基线", () => {
     expect(await readFile(metadataOutput, "utf8")).toBe("old-metadata");
   });
 
+  it("签名二进制首次发布时不尝试备份不存在的旧成品", async () => {
+    expect(policy.publishArtifactGroup).toBeTypeOf("function");
+    if (!policy.publishArtifactGroup) return;
+    const root = await mkdtemp(path.join(os.tmpdir(), "visualforge-signed-first-publish-"));
+    temporaryRoots.push(root);
+    const outputPath = path.join(root, "visualforge-native-host");
+    const temporaryPath = path.join(root, "visualforge-native-host.building");
+    await writeFile(temporaryPath, "first-signed-host");
+
+    await policy.publishArtifactGroup({
+      replacements: [{ temporaryPath, outputPath, copyInsteadOfRename: true }],
+      copyPath: async (from, to) => {
+        if (from === outputPath) throw Object.assign(new Error("cp 找不到旧成品"), { code: 1 });
+        await copyFile(from, to);
+      }
+    });
+
+    expect(await readFile(outputPath, "utf8")).toBe("first-signed-host");
+  });
+
   it("macOS ZIP、DMG 与两份校验文件任一发布失败时整组回滚", async () => {
     expect(policy.publishArtifactSetWithChecksums).toBeTypeOf("function");
     if (!policy.publishArtifactSetWithChecksums) return;
